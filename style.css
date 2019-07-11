@@ -1,0 +1,77 @@
+body{
+    font-family: 'Ruda', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    text-transform: capitalize;
+    background-color: #E6E6FA;
+}
+
+h1{
+    text-align: center;
+    font-family: 'Volkhov', serif;
+	text-transform: capitalize;
+	font-size:40px;
+}
+
+h2{
+    font-size:30px;
+}
+
+h3{
+    font-size: 14px;
+}
+
+input[type="text"]{
+    text-transform: capitalize;
+    font-family: 'Ruda', sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #4682B4;
+}
+
+.userChoice, .search{
+    padding: 5px 7px;
+    text-transform: capitalize;
+    font-family: 'Ruda', sans-serif;
+    border-radius: 5px;
+    background: #4682B4;
+    font-weight: 700;
+    color: white;
+    border: 2px solid aliceblue;
+    font-size: 18px;
+}
+
+.search{
+    text-transform: capitalize;
+    font-family: 'Ruda', sans-serif;
+    padding: 5px 7px;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+li{
+    margin: 10px 15px;
+}
+
+.restaurantResult{
+    width:100%;
+    margin-top: 30px;
+}
+
+.item{
+   width: 35%;
+   margin:0 10px;
+   border: 2px solid #ccc;
+}
+
+.mainPhoto{
+   width:100%;
+   height: 400px;
+}
+
