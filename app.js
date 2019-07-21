@@ -142,7 +142,7 @@ app.displayRestaurant = (restaurants) => {
         <div class="item-image">
           <h2>${item.restaurant.name}</h2>
           <h3>${item.restaurant.cuisines}</h3>
-          <img src="${item.restaurant.featured_image}" class ="mainPhoto" alt="restaurant main photo"> 
+          <img src="${item.restaurant.featured_image}" class ="mainPhoto" alt="restaurant main photo">
         </div>
         <div class="item-body">
           <p>address: ${item.restaurant.location.address}</p>

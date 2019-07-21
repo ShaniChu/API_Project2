@@ -6,6 +6,11 @@ body{
     background-color: #E6E6FA;
 }
 
+.wrapper{
+    margin:0 auto;
+    width:80%;
+}
+
 h1{
     text-align: center;
     font-family: 'Volkhov', serif;
@@ -24,7 +29,7 @@ h3{
 input[type="text"]{
     text-transform: capitalize;
     font-family: 'Ruda', sans-serif;
-    padding: 7px 20px;
+    padding: 1% 5%;
     text-align: center;
     font-size: 18px;
     font-weight: 700;
@@ -32,7 +37,8 @@ input[type="text"]{
 }
 
 .userChoice, .search{
-    padding: 5px 7px;
+    margin-top: 5%;
+    padding: 0.7% 1%;
     text-transform: capitalize;
     font-family: 'Ruda', sans-serif;
     border-radius: 5px;
@@ -43,15 +49,11 @@ input[type="text"]{
     font-size: 18px;
 }
 
-.search{
-    text-transform: capitalize;
-    font-family: 'Ruda', sans-serif;
-    padding: 5px 7px;
-}
-
 ul{
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
     justify-content: center;
 }
 
@@ -68,10 +70,76 @@ li{
    width: 35%;
    margin:0 10px;
    border: 2px solid #ccc;
+   flex-wrap: wrap;
 }
 
 .mainPhoto{
    width:100%;
-   height: 400px;
+   height: 200px;
 }
 
+..restaurantResult{
+  touch-action: none;
+}
+
+@media screen and (min-device-width: 179px) and (max-device-width: 283px) {
+    input[type="text"]{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-device-width: 179px){
+    input[type="text"]{
+        font-size: 9px;
+    }
+}
+
+@media screen and (min-device-width: 560px) and (max-device-width: 905px){
+    h2{
+        font-size: 22px;
+    }
+
+    body{
+        font-size:14px;
+    }
+}
+
+@media screen and (min-device-width: 250px) and (max-device-width: 560px) {
+    h2{
+        font-size: 16px;
+    }
+
+    h3{
+        font-size:14px;
+    }
+
+    body{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-device-width: 250px) {
+    h2{
+        font-size: 14px;
+    }
+
+    h3{
+        font-size:12px;
+    }
+
+    body{
+        font-size: 9px;
+    }
+}
+
+@media screen and (min-device-width: 510px) and (max-device-width: 1070px) {
+    .item{
+        width:45%;
+    }
+}
+
+@media screen  and (max-device-width: 510px) {
+    .item{
+        width:90%;
+    }
+}
