@@ -83,25 +83,25 @@ app.showCuisines = (shuffledArray) => {
   let user = $("#cuisine");
   let list = $("<ul>");
   $("#cuisine").empty();
+
   for(let i = 0; i < cuisineOption.length; i++){
     let item = $("<li>");
-    let input ='<input type="radio" name="Cuisines" value="' + cuisineOption[i].cuisine.cuisine_id + '" /> ';
-    input += cuisineOption[i].cuisine.cuisine_name;
+    let input ='<input type="button" name="Cuisines" id="'+ cuisineOption[i].cuisine.cuisine_id + '" class="cuisineType" value="'+cuisineOption[i].cuisine.cuisine_name+'">'
+
     item.append(input);
     list.append(item);
   }
-  let submit = '<input type="submit" value="submit" class="userChoice"/>';
+
   user.append(list);
-  user.append(submit);
   app.userCuisineSelection();
 }
 
 //The function app.userCuisineSelection gets the cuisine that the user choose and pass it 
 //to the function api.Search with two other arguments.
 app.userCuisineSelection = () => {
-  $(".userChoice").on("click", function(event){
+  $("input[type=button]").on("click", function(event){
     event.preventDefault();
-    app.userCuisine = $('input[name = "Cuisines"]:checked').val();
+    app.userCuisine = $(this).attr("id");
     app.apiSearch(app.entityId, app.entityType, app.userCuisine);
   });
 }
@@ -133,38 +133,47 @@ app.apiSearch = (city_id, city_name, cuisine) => {
 //The function app.displayRestaurant gets the restaurants details from the function app.apiSearch
 //and prints it nicly on the screen
 app.displayRestaurant = (restaurants) => {
-  $('.restaurantResult').remove();
-  $('body').append('<div class="restaurantResult"><div>');
- 
-  restaurants.forEach(item => {
-    const restaurantDetails = `
-      <div class="item">
-        <div class="item-image">
-          <h2>${item.restaurant.name}</h2>
-          <h3>${item.restaurant.cuisines}</h3>
-          <img src="${item.restaurant.featured_image}" class ="mainPhoto" alt="restaurant main photo">
+  $('#restaurantResult').remove();
+  $('.container').append('<div id="restaurantResult"></div>');
+
+      restaurants.forEach(item => {
+      const restaurantDetails = `
+        <div class="item">
+          <div class="item-image">
+            <h2>${item.restaurant.name}</h2>
+            <h3>${item.restaurant.cuisines}</h3>
+            <img src="${item.restaurant.featured_image}" class ="mainPhoto" alt="restaurant main photo">
+          </div>
+          <div class="item-body">
+            <p>address: ${item.restaurant.location.address}</p>
+            <p>phone:  ${item.restaurant.phone_numbers}</P>
+            <h4>rate: ${item.restaurant.user_rating.aggregate_rating}</h4>
+            <h4>${item.restaurant.user_rating.rating_text}</h4>
+          </div>
         </div>
-        <div class="item-body">
-          <p>address: ${item.restaurant.location.address}</p>
-          <p>phone:  ${item.restaurant.phone_numbers}</P>
-          <h4>rate: ${item.restaurant.user_rating.aggregate_rating}</h4>
-          <h4>${item.restaurant.user_rating.rating_text}</h4>
-        </div>
-      </div>
-    `
-    $(".restaurantResult").append(restaurantDetails); 
-  });
-  
-  $(".restaurantResult").flickity({
-    freeScroll: true,
-    wrapAround: true,
-    autoPlay: 3000,
-    pageDots: false,
-    prevNextButtons: false
-  });
+      `
+      if (item===0){
+          ('<class ="item showing">');
+      }
+
+      $("#restaurantResult").append(restaurantDetails);
+    }); 
+
+  //cards slideshow
+  let slides = document.querySelectorAll('#restaurantResult .item');
+  let currentSlide = 0;
+  let slideInterval = setInterval(nextSlide,5000);
+
+  function nextSlide(){
+    slides[currentSlide].className = 'item';
+    currentSlide = (currentSlide+1)%slides.length;
+    slides[currentSlide].className = 'item showing';
+  }
 }
 
-  $(function(){
+
+$(function(){
 
     app.Initial();
+    
   });
