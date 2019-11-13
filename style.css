@@ -12,11 +12,12 @@ body{
     background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/pablo-merchan-montes-Orz90t6o0e4-unsplash2.jpg') no-repeat;
     width: 100%;
     position: relative;
+    background-size: cover
 }
 
 .wrapper{
     margin:0 auto;
-    width:80%;
+    width:85%;
 }
 
 .text{
@@ -77,34 +78,35 @@ input[type="text"]{
     border: 2px solid white;
     font-size: 18px;
     cursor: pointer;
-
 }
 
-#cuisine ul{
+.cuisineType.clicked{
+  background: #0073B1;
+}
+
+ul{
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     padding-left: 0;
 }
 
-#cuisine li{
+li{
     margin: 10px 15px;
 }
 
-#cuisine li:nth-child(1){
+li:nth-child(1){
     margin-left:0;
-
 }
 
 .restaurantResult{
     width:100%;
     margin: 30px 0;
-    touch-action: none;
+    /*touch-action: none;*/
     padding: 30px 0;
     background:transparent;
     color: aliceblue;
-    overflow: hidden;
-    position:relative;
+    /*overflow: hidden;*/
     padding: 0px;
     margin: 0px;
 }
@@ -112,26 +114,52 @@ input[type="text"]{
 .item{
     width: 30%;
     padding:0 10px;
+    margin:0 20px;
     border: 2px solid #ccc;
     justify-content: center;
-    position: absolute;
     color: aliceblue;
-    left: 10%;
-    opacity: 0;
-    z-index: 1;
     margin-bottom: 20px;
 }
 
-.showing{
-    opacity: 1;
-    z-index: 2;
+
+.flickity-viewport {
+    overflow: hidden;
+    position: relative;
+    min-height:750px;
+}
+
+
+.flickity-prev-next-button.previous {
+  left: 10px;
+}
+
+.flickity-prev-next-button.next {
+  right: 10px;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+.flickity-prev-next-button {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  background: hsla(0,0%,100%,.75);
+  cursor: pointer;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .mainPhoto{
    width:100%;
-   height: 300px
+   object-fit: cover;
 }
-
 
 @media screen and (min-device-width: 179px) and (max-device-width: 283px) {
     input[type="text"]{
@@ -152,6 +180,12 @@ input[type="text"]{
 
     body{
         font-size:14px;
+    }
+}
+
+@media screen and (max-device-width: 915px) {
+    .item{
+        width:65%;
     }
 }
 
@@ -182,30 +216,6 @@ input[type="text"]{
         font-size: 12px;
     }
 }
-
-@media screen and (min-device-width: 510px) and (max-device-width: 1070px) {
-    .item{
-        width:50%;
-    }
-}
-
-@media screen  and (max-device-width: 510px) {
-    .item{
-        width:70%;
-    }
-
-    .mainPhoto{
-       height: 0;
-    }
-
-     button.search, input[type="button"]{
-        font-size: 14px;
-    }
-
-    #cuisine li:nth-child(1) {
-    margin-left: 15px;
-}
-
 
 @media screen  and (max-device-width: 510px) {
     button.search{

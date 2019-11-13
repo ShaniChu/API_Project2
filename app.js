@@ -30,6 +30,7 @@ app.apiLocation = (userVal) => {
     }
   }).then(function(result) {
     
+    
     app.entityId = result.location_suggestions[0].entity_id;
     app.entityType = result.location_suggestions[0].entity_type;
 
@@ -101,9 +102,11 @@ app.showCuisines = (shuffledArray) => {
 app.userCuisineSelection = () => {
   $("input[type=button]").on("click", function(event){
     event.preventDefault();
+    $('.cuisineType').addClass('.clicked');
     app.userCuisine = $(this).attr("id");
     app.apiSearch(app.entityId, app.entityType, app.userCuisine);
   });
+  $('cuisineType').removeClass('.clicked');
 }
 
 //The app.apiSearch function call an api that gets information, 
@@ -111,6 +114,7 @@ app.userCuisineSelection = () => {
 //some of the information we get is rating, reviews, address, 
 //operations hours, contact information and more.
 app.apiSearch = (city_id, city_name, cuisine) => {
+
   $.ajax({
     url:"https://developers.zomato.com/api/v2.1/search",
     method: "GET",
@@ -127,16 +131,19 @@ app.apiSearch = (city_id, city_name, cuisine) => {
     }
   }).then(function(finel_res){
     app.displayRestaurant(finel_res.restaurants); 
+    console.log(finel_res)
   });
 }
 
 //The function app.displayRestaurant gets the restaurants details from the function app.apiSearch
 //and prints it nicly on the screen
 app.displayRestaurant = (restaurants) => {
-  $('#restaurantResult').remove();
-  $('.container').append('<div id="restaurantResult"></div>');
 
-      restaurants.forEach(item => {
+  $('.restaurantResult').remove();
+  $('.container').append('<div class="restaurantResult"></div>');
+  /*restaurantsUpdate = restaurants.slice(0,10)
+  console.log(restaurantsUpdate)*/
+  restaurants.forEach(item => {
       const restaurantDetails = `
         <div class="item">
           <div class="item-image">
@@ -152,25 +159,17 @@ app.displayRestaurant = (restaurants) => {
           </div>
         </div>
       `
-      if (item===0){
-          ('<class ="item showing">');
-      }
-
-      $("#restaurantResult").append(restaurantDetails);
+      $('.restaurantResult').append(restaurantDetails);
     }); 
 
-  //cards slideshow
-  let slides = document.querySelectorAll('#restaurantResult .item');
-  let currentSlide = 0;
-  let slideInterval = setInterval(nextSlide,5000);
-
-  function nextSlide(){
-    slides[currentSlide].className = 'item';
-    currentSlide = (currentSlide+1)%slides.length;
-    slides[currentSlide].className = 'item showing';
-  }
+    $(".restaurantResult").flickity({
+      freeScroll: true,
+      autoPlay: 3000,
+      pageDots: false,
+      adaptiveHeight: true,
+      wrapAround: true
+    });
 }
-
 
 $(function(){
 
